@@ -1,0 +1,56 @@
+from kivy.app import App
+from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.button import Button
+from kivy.uix.label import Label
+
+class DessertShopGUI(BoxLayout):
+    def __init__(self, **kwargs):
+        super(DessertShopGUI, self).__init__(orientation='vertical')
+
+        self.title_label = Label(text='Dessert Shop')
+        self.add_widget(self.title_label)
+
+        self.order_list = OrderList()
+        self.add_widget(self.order_list)
+
+        self.button_layout = BoxLayout(orientation='horizontal')
+        self.add_widget(self.button_layout)
+
+        self.add_item_button = Button(text='Add Item')
+        self.button_layout.add_widget(self.add_item_button)
+
+        self.submit_order_button = Button(text='Submit Order')
+        self.button_layout.add_widget(self.submit_order_button)
+
+class OrderList(BoxLayout):
+    def __init__(self, **kwargs):
+        super(OrderList, self).__init__(orientation='vertical')
+
+        self.header_layout = BoxLayout(orientation='horizontal')
+        self.add_widget(self.header_layout)
+
+        self.name_label = Label(text='Name')
+        self.header_layout.add_widget(self.name_label)
+
+        self.quantity_label = Label(text='Quantity')
+        self.header_layout.add_widget(self.quantity_label)
+
+        self.unit_price_label = Label(text='Unit Price')
+        self.header_layout.add_widget(self.unit_price_label)
+
+        self.cost_label = Label(text='Cost')
+        self.header_layout.add_widget(self.cost_label)
+
+        self.tax_label = Label(text='Tax')
+        self.header_layout.add_widget(self.tax_label)
+
+def main_menu():
+    default_payment = PayType.CASH
+    freezer = Freezer()
+
+    app = DessertShopApp()
+    app.run()
+
+class DessertShopApp(App):
+    def build(self):
+        return DessertShopGUI()
